@@ -6,13 +6,7 @@
       "jsx": true
     }
   },
-  "extends": [
-    "prettier",
-    "plugin:react-hooks/recommended",
-    "react-app",
-    "react-app/jest",
-    "next/core-web-vitals"
-  ],
+  "extends": ["prettier", "react-app", "react-app/jest"],
   "plugins": ["prettier", "import", "react"],
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
