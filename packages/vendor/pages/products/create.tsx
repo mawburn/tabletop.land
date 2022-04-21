@@ -55,7 +55,24 @@ const CreateProduct: NextPage = () => {
                 <textarea
                   id="descr"
                   className="p-2 h-52 w-full border border-neutral-400 rounded"
+                  {...register('description', { required: true, minLength: 25 })}
                 ></textarea>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <div className="flex gap-2 items-center">
+                  <Input
+                    title="Price"
+                    type="number"
+                    smallLabel
+                    {...register('price', { required: true, valueAsNumber: true, min: 0.0 })}
+                  />
+                  <Input
+                    title="Sale Price"
+                    type="number"
+                    smallLabel
+                    {...register('salePrice', { required: true, valueAsNumber: true, min: 0.0 })}
+                  />
+                </div>
               </div>
             </form>
           </section>

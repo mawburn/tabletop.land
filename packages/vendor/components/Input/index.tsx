@@ -9,6 +9,8 @@ interface InputProps extends Partial<UseFormRegister<FieldValues>> {
   title: string
   placeholder?: string
   type?: string
+  smallLabel?: boolean
+  inlineLabel?: boolean
   className?: string
 }
 
@@ -16,15 +18,22 @@ export const Input = ({
   title,
   placeholder = '',
   type = 'text',
+  smallLabel,
+  inlineLabel,
   className,
   ...rest
 }: InputProps) => {
   const titleSm = title.replace(/ /gi, '').toLocaleLowerCase()
   const textId = useRef(uniqueId(titleSm))
 
+  const labelSize = smallLabel ? 'text-normal' : 'text-xl'
+
   return (
     <>
-      <label htmlFor={textId.current} className="block font-bold text-xl my-1">
+      <label
+        htmlFor={textId.current}
+        className={`block font-bold whitespace-nowrap ${labelSize} my-1`}
+      >
         {title}
       </label>
       <input
@@ -32,6 +41,7 @@ export const Input = ({
         id={textId.current}
         placeholder={placeholder}
         className={cn(styles.input, className)}
+        type={type}
         {...rest}
       />
     </>
