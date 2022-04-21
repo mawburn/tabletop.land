@@ -9,12 +9,12 @@
 
 html,
 body {
-  @apply font-body h-full;
+  @apply font-body h-full text-lightTxt bg-neutral-300;
   @apply dark:bg-darkBg dark:text-darkTxt;
 }
 
 #__next {
-  @apply w-full;
+  @apply w-full min-h-full;
 }
 
 a,
@@ -32,7 +32,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-header tracking-wider font-bold;
+  @apply font-header tracking-wider font-bold text-primary;
   @apply dark:text-secondary;
 }
 
@@ -50,4 +50,10 @@ h3 {
 
 h4 {
   @apply text-lg;
+}
+
+/* Custom Classe */
+
+.card {
+  @apply bg-white drop-shadow-md;
 }

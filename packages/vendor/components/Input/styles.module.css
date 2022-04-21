@@ -1,0 +1,11 @@
+.label {
+
+}
+
+.input {
+  @apply w-full border border-neutral-400 rounded p-2 text-lg;
+}
+
+.input::placeholder {
+  @apply italic;
+}

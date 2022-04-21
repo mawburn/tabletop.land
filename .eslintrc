@@ -7,7 +7,7 @@
     }
   },
   "extends": ["prettier", "react-app", "react-app/jest"],
-  "plugins": ["prettier", "import", "react"],
+  "plugins": ["prettier", "react"],
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
     "eqeqeq": ["error", "always"],

@@ -1,0 +1,3 @@
+.main {
+  @apply mx-auto my-2 max-w-screen-lg w-full h-full;
+}
