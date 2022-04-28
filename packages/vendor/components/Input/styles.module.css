@@ -6,6 +6,10 @@
   @apply w-full h-fit border border-neutral-400 rounded p-2 text-lg;
 }
 
+.input.number {
+  @apply text-right;
+}
+
 .input::placeholder {
   @apply italic;
 }

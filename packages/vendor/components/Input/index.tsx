@@ -2,6 +2,7 @@ import cn from 'clsx'
 import uniqueId from 'lodash/uniqueId'
 import { useRef } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
+import NumberFormat from 'react-number-format'
 
 import styles from './styles.module.css'
 
@@ -12,6 +13,8 @@ interface InputProps extends Partial<UseFormRegister<FieldValues>> {
   smallLabel?: boolean
   inlineLabel?: boolean
   className?: string
+  noEmpty?: boolean
+  defaultValue?: string
 }
 
 export const Input = ({
@@ -21,6 +24,8 @@ export const Input = ({
   smallLabel,
   inlineLabel,
   className,
+  noEmpty = false,
+  defaultValue,
   ...rest
 }: InputProps) => {
   const titleSm = title.replace(/ /gi, '').toLocaleLowerCase()
@@ -36,14 +41,28 @@ export const Input = ({
       >
         {title}
       </label>
-      <input
-        name={titleSm}
-        id={textId.current}
-        placeholder={placeholder}
-        className={cn(styles.input, className)}
-        type={type}
-        {...rest}
-      />
+      {type === 'currency' ? (
+        <NumberFormat
+          prefix={'$'}
+          allowNegative={false}
+          decimalScale={2}
+          fixedDecimalScale={true}
+          isNumericString={true}
+          className={cn(styles.input, className)}
+          allowEmptyFormatting={noEmpty}
+          defaultValue={defaultValue}
+          {...rest}
+        />
+      ) : (
+        <input
+          name={titleSm}
+          id={textId.current}
+          placeholder={placeholder}
+          className={cn(styles.input, className)}
+          type={type}
+          {...rest}
+        />
+      )}
     </>
   )
 }

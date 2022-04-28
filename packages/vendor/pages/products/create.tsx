@@ -62,15 +62,27 @@ const CreateProduct: NextPage = () => {
                 <div className="flex gap-2 items-center">
                   <Input
                     title="Price"
-                    type="number"
+                    type="currency"
                     smallLabel
-                    {...register('price', { required: true, valueAsNumber: true, min: 0.0 })}
+                    noEmpty
+                    defaultValue="0.30"
+                    {...register('price', {
+                      required: true,
+                      min: 0.3,
+                      maxLength: 10,
+                      pattern: /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/g,
+                    })}
                   />
                   <Input
                     title="Sale Price"
-                    type="number"
+                    type="currency"
                     smallLabel
-                    {...register('salePrice', { required: true, valueAsNumber: true, min: 0.0 })}
+                    {...register('salePrice', {
+                      required: true,
+                      min: 0.3,
+                      maxLength: 10,
+                      pattern: /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/g,
+                    })}
                   />
                 </div>
               </div>
