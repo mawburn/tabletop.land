@@ -1,8 +1,6 @@
 import cn from 'clsx'
-import uniqueId from 'lodash/uniqueId'
-import { useRef } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
-import NumberFormat from 'react-number-format'
+import { useGetId } from '../../hooks/useGetId'
 
 import styles from './styles.module.css'
 
@@ -15,6 +13,7 @@ interface InputProps extends Partial<UseFormRegister<FieldValues>> {
   className?: string
   noEmpty?: boolean
   defaultValue?: string
+  required?: boolean
 }
 
 export const Input = ({
@@ -26,43 +25,32 @@ export const Input = ({
   className,
   noEmpty = false,
   defaultValue,
+  required = false,
   ...rest
 }: InputProps) => {
   const titleSm = title.replace(/ /gi, '').toLocaleLowerCase()
-  const textId = useRef(uniqueId(titleSm))
+  const textId = useGetId(titleSm)
 
   const labelSize = smallLabel ? 'text-normal' : 'text-xl'
 
   return (
     <>
-      <label
-        htmlFor={textId.current}
-        className={`block font-bold whitespace-nowrap ${labelSize} my-1`}
-      >
-        {title}
+      <label htmlFor={textId} className={`block font-bold whitespace-nowrap ${labelSize} my-1`}>
+        {title}{' '}
+        {required && (
+          <span className="text-red-500 font-normal text-base" title="required">
+            *
+          </span>
+        )}
       </label>
-      {type === 'currency' ? (
-        <NumberFormat
-          prefix={'$'}
-          allowNegative={false}
-          decimalScale={2}
-          fixedDecimalScale={true}
-          isNumericString={true}
-          className={cn(styles.input, className)}
-          allowEmptyFormatting={noEmpty}
-          defaultValue={defaultValue}
-          {...rest}
-        />
-      ) : (
-        <input
-          name={titleSm}
-          id={textId.current}
-          placeholder={placeholder}
-          className={cn(styles.input, className)}
-          type={type}
-          {...rest}
-        />
-      )}
+      <input
+        name={titleSm}
+        id={textId}
+        placeholder={placeholder}
+        className={cn(styles.input, className)}
+        type={type}
+        {...rest}
+      />
     </>
   )
 }

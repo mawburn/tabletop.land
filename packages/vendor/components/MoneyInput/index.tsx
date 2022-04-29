@@ -1,17 +1,16 @@
 import cn from 'clsx'
-import uniqueId from 'lodash/uniqueId'
-import { useRef } from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
 import NumberFormat from 'react-number-format'
+import { useGetId } from '../../hooks/useGetId'
 
 import styles from './styles.module.css'
 
-interface MoneyInputProps extends Partial<UseFormRegister<FieldValues>> {
+interface MoneyInputProps {
   title: string
   smallLabel?: boolean
   className?: string
   noEmpty?: boolean
   defaultValue?: string
+  required?: boolean
 }
 
 export const MoneyInput = ({
@@ -19,22 +18,26 @@ export const MoneyInput = ({
   smallLabel,
   className,
   noEmpty = false,
+  required = false,
   defaultValue,
 }: MoneyInputProps) => {
   const titleSm = title.replace(/ /gi, '').toLocaleLowerCase()
-  const textId = useRef(uniqueId(titleSm))
+  const textId = useGetId(titleSm)
 
   const labelSize = smallLabel ? 'text-normal' : 'text-xl'
 
   return (
     <>
-      <label
-        htmlFor={textId.current}
-        className={`block font-bold whitespace-nowrap ${labelSize} my-1`}
-      >
-        {title}
+      <label htmlFor={textId} className={`block font-bold whitespace-nowrap ${labelSize} my-1`}>
+        {title}{' '}
+        {required && (
+          <span className="text-red-500 font-normal text-base" title="required">
+            *
+          </span>
+        )}
       </label>
       <NumberFormat
+        id={textId}
         prefix={'$'}
         allowNegative={false}
         decimalScale={2}
