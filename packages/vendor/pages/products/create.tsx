@@ -1,19 +1,21 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useCallback } from 'react'
-import { useForm } from 'react-hook-form'
-import { Input } from '../../components/Input'
+import { Controller, useForm } from 'react-hook-form'
+
 import { BeakerIcon, PhotographIcon } from '@heroicons/react/outline'
 
+import { Input } from '../../components/Input'
 import Layout from '../../components/Layout'
+import { MoneyInput } from '../../components/MoneyInput'
 import config from '../../config'
 import styles from '../../styles/Products.module.css'
-import { MoneyInput } from '../../components/MoneyInput'
 
 const CreateProduct: NextPage = () => {
   const {
     register,
     handleSubmit,
+    control,
     watch,
     formState: { errors },
   } = useForm()
@@ -54,27 +56,26 @@ const CreateProduct: NextPage = () => {
               </div>
               <div className="flex flex-wrap gap-2">
                 <div className="flex gap-2 items-center">
-                  <MoneyInput
-                    title="Price"
-                    smallLabel
-                    noEmpty
-                    defaultValue="0.50"
-                    // {...register('price', {
-                    //   required: true,
-                    //   min: 0.50,
-                    //   maxLength: 10,
-                    //   pattern: /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/g,
-                    // })}
+                  <Controller
+                    name="price"
+                    control={control}
+                    rules={{
+                      required: true,
+                      min: 0.5,
+                      maxLength: 10,
+                    }}
+                    render={() => (
+                      <MoneyInput title="Price" smallLabel noEmpty defaultValue="0.50" />
+                    )}
                   />
-                  <MoneyInput
-                    title="Sale Price"
-                    smallLabel
-                    // {...register('salePrice', {
-                    //   required: true,
-                    //   min: 0.50,
-                    //   maxLength: 10,
-                    //   pattern: /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/g,
-                    // })}
+                  <Controller
+                    name="salePrice"
+                    control={control}
+                    rules={{
+                      min: 0.5,
+                      maxLength: 10,
+                    }}
+                    render={() => <MoneyInput title="Sale Price" smallLabel />}
                   />
                 </div>
               </div>
