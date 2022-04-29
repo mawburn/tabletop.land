@@ -8,6 +8,7 @@ import { BeakerIcon, PhotographIcon } from '@heroicons/react/outline'
 import Layout from '../../components/Layout'
 import config from '../../config'
 import styles from '../../styles/Products.module.css'
+import { MoneyInput } from '../../components/MoneyInput'
 
 const CreateProduct: NextPage = () => {
   const {
@@ -25,7 +26,7 @@ const CreateProduct: NextPage = () => {
         <title>{`Create a new product - ${config.title}`}</title>
       </Head>
       <Layout>
-        <article className="card h-full rounded-md">
+        <article className="card h-full rounded-md m-3">
           <section className="p-2">
             <div className="flex items-center">
               <BeakerIcon className="mr-2 h-8 w-8 text-primary" />
@@ -39,6 +40,44 @@ const CreateProduct: NextPage = () => {
                   {...register('title', { required: true, maxLength: 25 })}
                 />
               </div>
+
+              <div className="my-8">
+                <label htmlFor="descr" className="block font-bold text-xl my-1">
+                  Description
+                </label>
+                <textarea
+                  id="descr"
+                  placeholder='Tip: Use "Markdown" to format your text'
+                  className="p-2 h-52 w-full border border-neutral-400 rounded"
+                  {...register('description', { required: true, minLength: 25 })}
+                ></textarea>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <div className="flex gap-2 items-center">
+                  <MoneyInput
+                    title="Price"
+                    smallLabel
+                    noEmpty
+                    defaultValue="0.50"
+                    // {...register('price', {
+                    //   required: true,
+                    //   min: 0.50,
+                    //   maxLength: 10,
+                    //   pattern: /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/g,
+                    // })}
+                  />
+                  <MoneyInput
+                    title="Sale Price"
+                    smallLabel
+                    // {...register('salePrice', {
+                    //   required: true,
+                    //   min: 0.50,
+                    //   maxLength: 10,
+                    //   pattern: /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/g,
+                    // })}
+                  />
+                </div>
+              </div>
               <div className="flex items-center justify-center my-8 h-52 border border-neutral-400 rounded">
                 <div className="flex flex-col items-center justify-center">
                   <PhotographIcon className="h-10 w-10 opacity-70" />
@@ -46,44 +85,6 @@ const CreateProduct: NextPage = () => {
                   <p className="italic opacity-70">
                     Upload eye catching photos that show the product from many angles
                   </p>
-                </div>
-              </div>
-              <div className="my-8">
-                <label htmlFor="descr" className="block font-bold text-xl my-1">
-                  Description
-                </label>
-                <textarea
-                  id="descr"
-                  className="p-2 h-52 w-full border border-neutral-400 rounded"
-                  {...register('description', { required: true, minLength: 25 })}
-                ></textarea>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <div className="flex gap-2 items-center">
-                  <Input
-                    title="Price"
-                    type="currency"
-                    smallLabel
-                    noEmpty
-                    defaultValue="0.30"
-                    {...register('price', {
-                      required: true,
-                      min: 0.3,
-                      maxLength: 10,
-                      pattern: /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/g,
-                    })}
-                  />
-                  <Input
-                    title="Sale Price"
-                    type="currency"
-                    smallLabel
-                    {...register('salePrice', {
-                      required: true,
-                      min: 0.3,
-                      maxLength: 10,
-                      pattern: /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/g,
-                    })}
-                  />
                 </div>
               </div>
             </form>
