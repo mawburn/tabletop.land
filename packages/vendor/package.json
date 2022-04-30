@@ -20,6 +20,7 @@
     "recoil": "^0.7.2",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
+    "sharp": "^0.30.4",
     "xstate": "^4.31.0"
   },
   "devDependencies": {
