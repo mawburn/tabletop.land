@@ -1,5 +1,8 @@
 import cn from 'clsx'
+import { Fragment } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
+
+import styles from './styles.module.css'
 
 import { useGetId } from '../../hooks/useGetId'
 
@@ -29,10 +32,17 @@ const Selector = ({
   return multiple ? (
     <>
       {options.map(({ key, value }) => (
-        <div key={`${textId}key`} className="w-fit whitespace-nowrap">
-          <input type="checkbox" id={`${textId}${key}`} name={titleSm} value={key} {...rest} />
-          <label htmlFor={`${textId}${key}`} className="w-full">
-            {value}
+        <div key={`${textId}key`} className={styles.container}>
+          <label className={styles.label}>
+            <input
+              type="checkbox"
+              className={styles.checkbox}
+              id={`${textId}${key}`}
+              name={titleSm}
+              value={key}
+              {...rest}
+            />
+            <span className={styles.text}>{value}</span>
           </label>
         </div>
       ))}

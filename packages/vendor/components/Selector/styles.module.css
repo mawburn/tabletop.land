@@ -1,0 +1,19 @@
+.container {
+  @apply inline-flex pr-4;
+}
+
+.label {
+  @apply hover:cursor-pointer inline-flex items-center w-full;
+}
+
+.checkbox {
+  @apply w-6 h-6 rounded;
+}
+
+.text {
+  @apply ml-2;
+}
+
+
+
+
