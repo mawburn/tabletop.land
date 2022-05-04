@@ -1,10 +1,9 @@
 import cn from 'clsx'
-import { Fragment } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
 
-import styles from './styles.module.css'
-
 import { useGetId } from '../../hooks/useGetId'
+import SelectBox from './SelectBox'
+import styles from './styles.module.css'
 
 interface SelectorProps extends Partial<UseFormRegister<FieldValues>> {
   title: string
@@ -30,26 +29,21 @@ const Selector = ({
   const labelSize = smallLabel ? 'text-normal' : 'text-xl'
 
   return multiple ? (
-    <>
+    <div className={styles.switch}>
       {options.map(({ key, value }) => (
-        <div key={`${textId}key`} className={styles.container}>
-          <label className={styles.label}>
-            <input
-              type="checkbox"
-              className={styles.checkbox}
-              id={`${textId}${key}`}
-              name={titleSm}
-              value={key}
-              {...rest}
-            />
-            <span className={styles.text}>{value}</span>
-          </label>
-        </div>
+        <SelectBox
+          key={`${textId}${key}`}
+          id={`${textId}${key}`}
+          name={titleSm}
+          keyVal={{ key, value }}
+          className={className}
+          {...rest}
+        />
       ))}
-    </>
+    </div>
   ) : (
     <>
-      <label htmlFor={textId} className={`block font-bold whitespace-nowrap ${labelSize} my-1`}>
+      <label htmlFor={textId} className={`textLabel ${labelSize}`}>
         {title}
       </label>
       <select id={textId} className={cn(className)} defaultValue={selected} {...rest}>

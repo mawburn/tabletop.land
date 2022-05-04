@@ -8,17 +8,21 @@ module.exports = {
         darkTxt: '#f0f0f0',
         lightTxt: '#242424',
         primary: '#3e1858',
+        primaryLight: '#8535bf',
         secondary: '#ffd921',
         tertiary: '#e88858',
       },
+      fontFamily: {
+        sans: ['"Open Sans"', 'sans-serif'],
+        body: ['"Open Sans"', 'sans-serif'],
+      },
     },
     fontFamily: {
-      body: ['"Open Sans"', 'sans-serif'],
       header: ['"Coolvetica"', 'sans-serif'],
     },
     container: {
       center: true,
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('tw-elements/dist/plugin')],
 }

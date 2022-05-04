@@ -21,6 +21,7 @@
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
     "sharp": "^0.30.4",
+    "tw-elements": "^1.0.0-alpha12",
     "xstate": "^4.31.0"
   },
   "devDependencies": {

@@ -10,6 +10,9 @@ import Layout from '../../components/Layout'
 import { MoneyInput } from '../../components/MoneyInput'
 import Selector from '../../components/Selector'
 import config from '../../config'
+import Required from '../../components/Required'
+
+import styles from '../../styles/Products.module.css'
 
 const games = [
   { key: '5e', value: '5e' },
@@ -114,10 +117,7 @@ const CreateProduct: NextPage = () => {
               <h1>Create a new listing</h1>
             </div>
             <div className="p-2 mt-4">
-              <span className="opacity-75">Required fields are marked with</span>{' '}
-              <span className="text-red-500 font-normal text-base" title="required">
-                *
-              </span>
+              <span className="opacity-75">Required fields are marked with</span> <Required />
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="p-3">
               <div className="my-4">
@@ -128,26 +128,21 @@ const CreateProduct: NextPage = () => {
                   {...register('title', { required: true, maxLength: 30 })}
                 />
               </div>
-              <fieldset>
-                <legend className="my-4">
-                  Listing Type{' '}
-                  <span className="text-red-500 font-normal text-base" title="required">
-                    *
-                  </span>
+              <fieldset className="mt-8">
+                <legend className="textLabel">
+                  Listing Type <Required />
                 </legend>
                 <Selector
                   title="Type"
                   options={type}
                   multiple
+                  className={styles.smallLabel}
                   {...register('type', { required: true })}
                 />
               </fieldset>
               <div className="my-8">
                 <label htmlFor="descr" className="block font-bold text-xl my-1">
-                  Description{' '}
-                  <span className="text-red-500 font-normal text-base" title="required">
-                    *
-                  </span>
+                  Description <Required />
                 </label>
                 <textarea
                   id="descr"
@@ -183,54 +178,52 @@ const CreateProduct: NextPage = () => {
                 <div className="flex flex-col items-center justify-center">
                   <PhotographIcon className="h-10 w-10 opacity-70" />
                   <div className="text-xl font-bold">
-                    Add photos{' '}
-                    <span className="text-red-500 font-normal text-base" title="required">
-                      *
-                    </span>
+                    Add photos <Required />
                   </div>
                   <p className="italic opacity-70">
                     Upload eye catching photos that show the product from many angles
                   </p>
                 </div>
               </div>
-              <fieldset>
-                <legend className="my-4">Compatible games</legend>
+              <fieldset className="mt-8">
+                <legend className="textLabel">Compatible games</legend>
                 <Selector
                   title="Compatible Games"
                   options={games}
                   multiple
+                  className={styles.smallLabel}
                   {...register('game', { required: false })}
                 />
               </fieldset>
-              <fieldset>
-                <legend className="my-4">
-                  Setting{' '}
-                  <span className="text-red-500 font-normal text-base" title="required">
-                    *
-                  </span>
+              <fieldset className="mt-8">
+                <legend className="textLabel">
+                  Setting <Required />
                 </legend>
                 <Selector
                   title="setting"
                   options={setting}
                   multiple
+                  className={styles.smallLabel}
                   {...register('setting', { required: true })}
                 />
               </fieldset>
-              <fieldset>
-                <legend className="my-4">Environment</legend>
+              <fieldset className="mt-8">
+                <legend className="textLabel">Environment</legend>
                 <Selector
                   title="Environment"
                   options={environment}
                   multiple
+                  className={styles.smallLabel}
                   {...register('environment', { required: false })}
                 />
               </fieldset>
-              <fieldset>
-                <legend className="my-4">Materials Used</legend>
+              <fieldset className="mt-8">
+                <legend className="textLabel">Materials Used</legend>
                 <Selector
                   title="Materials"
                   options={material}
                   multiple
+                  className={styles.smallLabel}
                   {...register('materials', { required: false })}
                 />
               </fieldset>

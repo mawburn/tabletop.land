@@ -1,0 +1,3 @@
+.smallLabel label {
+  @apply text-sm;
+}

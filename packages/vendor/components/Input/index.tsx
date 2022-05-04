@@ -35,7 +35,7 @@ export const Input = ({
 
   return (
     <>
-      <label htmlFor={textId} className={`block font-bold whitespace-nowrap ${labelSize} my-1`}>
+      <label htmlFor={textId} className={`textLabel ${labelSize}`}>
         {title}{' '}
         {required && (
           <span className="text-red-500 font-normal text-base" title="required">

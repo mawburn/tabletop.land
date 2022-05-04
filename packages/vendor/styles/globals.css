@@ -57,3 +57,7 @@ h4 {
 .card {
   @apply bg-white drop-shadow-md;
 }
+
+.textLabel {
+  @apply block font-bold whitespace-nowrap text-xl my-1;
+}
