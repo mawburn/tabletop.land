@@ -1,0 +1,3 @@
+.tip {
+  @apply font-light italic text-sm mt-4;
+}

@@ -27,14 +27,9 @@ export const MoneyInput = ({
   const labelSize = smallLabel ? 'text-normal' : 'text-xl'
 
   return (
-    <>
+    <div className="flex justify-center items-center">
       <label htmlFor={textId} className={`block font-bold whitespace-nowrap ${labelSize} my-1`}>
         {title}{' '}
-        {required && (
-          <span className="text-red-500 font-normal text-base" title="required">
-            *
-          </span>
-        )}
       </label>
       <NumberFormat
         id={textId}
@@ -47,6 +42,11 @@ export const MoneyInput = ({
         allowEmptyFormatting={noEmpty}
         defaultValue={defaultValue}
       />
-    </>
+      {required && (
+        <span className="text-red-500 font-normal text-base" title="required">
+          *
+        </span>
+      )}
+    </div>
   )
 }

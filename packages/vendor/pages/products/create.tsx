@@ -13,14 +13,24 @@ import config from '../../config'
 import Required from '../../components/Required'
 
 import styles from '../../styles/Products.module.css'
+import Tip from '../../components/Tip'
+import PhotoUpload from '../../components/PhotoUpload'
 
 const games = [
   { key: '5e', value: '5e' },
   { key: 'wh40k', value: 'WH40k' },
   { key: 'pf', value: 'PF2e/3.5e' },
+  { key: 'sw', value: 'Savage Worlds' },
   { key: 'gaslands', value: 'Gaslands' },
   { key: 'historical', value: 'Historical' },
 ].sort((a, b) => a.value.localeCompare(b.value))
+
+const sales = [
+  { key: '10', value: '10%' },
+  { key: '25', value: '25%' },
+  { key: '50', value: '50%' },
+  { key: '75', value: '75%' },
+]
 
 const type = [
   { key: 'dice', value: 'Dice' },
@@ -34,6 +44,7 @@ const type = [
   { key: 'tools', value: 'Crafting Tools' },
   { key: 'partial', value: 'Partial Terrain' },
   { key: 'clothing', value: 'Clothing & Accessories' },
+  { key: 'boardgame', value: 'Board Game Accessory' },
 ].sort((a, b) => a.value.localeCompare(b.value))
 
 type.push({ key: 'other', value: 'Other' })
@@ -69,6 +80,7 @@ const setting = [
 ].sort((a, b) => a.value.localeCompare(b.value))
 
 setting.push({ key: 'other', value: 'Other' })
+setting.push({ key: 'na', value: 'N/A' })
 
 const material = [
   { key: 'dental-stone', value: 'Dental Stone' },
@@ -89,6 +101,9 @@ const material = [
   { key: 'resin', value: 'Resin' },
   { key: 'pla', value: 'PLA' },
   { key: 'abs', value: 'ABS' },
+  { key: 'wood', value: 'Wood' },
+  { key: 'mdf', value: 'MDF' },
+  { key: 'absresin', value: 'ABS-like Resin' },
 ].sort((a, b) => a.value.localeCompare(b.value))
 
 material.push({ key: 'other', value: 'Other' })
@@ -128,31 +143,9 @@ const CreateProduct: NextPage = () => {
                   {...register('title', { required: true, maxLength: 30 })}
                 />
               </div>
-              <fieldset className="mt-8">
-                <legend className="textLabel">
-                  Listing Type <Required />
-                </legend>
-                <Selector
-                  title="Type"
-                  options={type}
-                  multiple
-                  className={styles.smallLabel}
-                  {...register('type', { required: true })}
-                />
-              </fieldset>
-              <div className="my-8">
-                <label htmlFor="descr" className="block font-bold text-xl my-1">
-                  Description <Required />
-                </label>
-                <textarea
-                  id="descr"
-                  placeholder='Tip: Use "Markdown" to format your text'
-                  className="p-2 h-52 w-full border border-neutral-400 rounded"
-                  {...register('description', { required: true, minLength: 25 })}
-                ></textarea>
-              </div>
+              <PhotoUpload />
               <div className="flex flex-wrap gap-2">
-                <div className="flex gap-2 items-center">
+                <div className="flex flex-col gap-2 items-center">
                   <Controller
                     name="price"
                     control={control}
@@ -174,27 +167,32 @@ const CreateProduct: NextPage = () => {
                   />
                 </div>
               </div>
-              <div className="flex items-center justify-center my-8 h-52 border border-neutral-400 rounded">
-                <div className="flex flex-col items-center justify-center">
-                  <PhotographIcon className="h-10 w-10 opacity-70" />
-                  <div className="text-xl font-bold">
-                    Add photos <Required />
-                  </div>
-                  <p className="italic opacity-70">
-                    Upload eye catching photos that show the product from many angles
-                  </p>
-                </div>
-              </div>
               <fieldset className="mt-8">
-                <legend className="textLabel">Compatible games</legend>
+                <legend className="textLabel">
+                  Listing Type <Required />
+                </legend>
                 <Selector
-                  title="Compatible Games"
-                  options={games}
+                  title="Type"
+                  options={type}
                   multiple
                   className={styles.smallLabel}
-                  {...register('game', { required: false })}
+                  {...register('type', { required: true })}
                 />
               </fieldset>
+              <div className="mt-4">
+                <Tip>Tip: Listings can be anything related to tabletop gaming in any way.</Tip>
+              </div>
+              <div className="my-8">
+                <label htmlFor="descr" className="block font-bold text-xl my-1">
+                  Description <Required />
+                </label>
+                <textarea
+                  id="descr"
+                  placeholder='Tip: Use "Markdown" to format your text'
+                  className="p-2 h-52 w-full border border-neutral-400 rounded"
+                  {...register('description', { required: true, minLength: 25 })}
+                ></textarea>
+              </div>
               <fieldset className="mt-8">
                 <legend className="textLabel">
                   Setting <Required />
@@ -208,6 +206,17 @@ const CreateProduct: NextPage = () => {
                 />
               </fieldset>
               <fieldset className="mt-8">
+                <legend className="textLabel">Compatible games</legend>
+                <Selector
+                  title="Compatible Games"
+                  options={games}
+                  multiple
+                  className={styles.smallLabel}
+                  {...register('game', { required: false })}
+                />
+              </fieldset>
+
+              <fieldset className="mt-8">
                 <legend className="textLabel">Environment</legend>
                 <Selector
                   title="Environment"
@@ -217,6 +226,9 @@ const CreateProduct: NextPage = () => {
                   {...register('environment', { required: false })}
                 />
               </fieldset>
+              <div className="mt-4">
+                <Tip>Tip: Adding related environments can help people find your stuff!</Tip>
+              </div>
               <fieldset className="mt-8">
                 <legend className="textLabel">Materials Used</legend>
                 <Selector
@@ -227,6 +239,16 @@ const CreateProduct: NextPage = () => {
                   {...register('materials', { required: false })}
                 />
               </fieldset>
+              <div className="flex space-x-2 justify-end mt-8">
+                <button
+                  type="submit"
+                  data-mdb-ripple="true"
+                  data-mdb-ripple-color="light"
+                  className={styles.submit}
+                >
+                  Submit Listing
+                </button>
+              </div>
             </form>
           </section>
         </article>
