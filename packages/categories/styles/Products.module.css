@@ -1,0 +1,11 @@
+.smallLabel label {
+  @apply text-sm;
+}
+
+.submit {
+  @apply min-w-[25%] inline-block px-6 py-4 font-medium leading-tight uppercase rounded transition duration-150 ease-in-out;
+  @apply bg-primaryLight text-white shadow-md;
+  @apply hover:shadow-lg;
+  @apply focus:bg-primaryLight focus:shadow-lg focus:outline-none focus:ring-0;
+  @apply active:bg-primary active:shadow-lg
+}

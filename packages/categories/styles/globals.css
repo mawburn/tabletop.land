@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("../public/fonts/Coolvetica.woff");
+}
+
+html,
+body {
+  @apply font-body h-full text-lightTxt bg-neutral-300;
+  @apply dark:bg-darkBg dark:text-darkTxt;
+}
+
+#__next {
+  @apply w-full min-h-full;
+}
+
+a,
+a:any-link {
+  @apply font-semibold;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-header tracking-wider font-bold text-primary;
+  @apply dark:text-secondary;
+}
+
+h1 {
+  @apply text-3xl;
+}
+
+h2 {
+  @apply text-2xl;
+}
+
+h3 {
+  @apply text-xl;
+}
+
+h4 {
+  @apply text-lg;
+}
+
+/* Custom Classe */
+
+.card {
+  @apply bg-white drop-shadow-md;
+}
+
+.textLabel {
+  @apply block font-bold whitespace-nowrap text-xl my-1;
+}
