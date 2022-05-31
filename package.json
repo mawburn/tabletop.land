@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "dev:cats": "cd packages/categories && yarn dev",
     "dev:vendor": "cd packages/vendor && yarn dev"
   },
   "devDependencies": {
