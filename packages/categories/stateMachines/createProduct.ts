@@ -1,13 +1,13 @@
-import { createMachine } from 'xstate';
+import { Product } from './../types/Product'
+import { createMachine } from 'xstate'
 
-export const createProduct= createMachine({
+export const createProduct = createMachine<Partial<Product>>({
   id: 'productCreator',
   initial: 'name',
   context: {},
   states: {
     nameDescription: {},
     price: {},
-    variations: {},
     mainType: {},
     mini: {},
     terrain: {},
@@ -21,6 +21,7 @@ export const createProduct= createMachine({
     simulatedType: {},
     setting: {},
     materials: {},
+    variations: {},
     finish: {},
-  }
-});
+  },
+})
